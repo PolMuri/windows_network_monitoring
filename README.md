@@ -20,3 +20,37 @@ The Log-NetworkInfo function creates a new daily log containing the date, active
 -Log Location: Logs are saved in C:\logs in files formatted as NetworkMonitor_yyyyMMdd.log.
 -Scheduling: It can be scheduled to run automatically every 24 hours using the Windows Task Scheduler.
 
+## Allow script execution
+
+Option 1: Change the Execution Policy
+
+You can temporarily change the execution policy with this command:
+````
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+`````
+
+Explanation:
+
+-Bypass allows any script to run without restrictions.
+-Scope Process applies this change only to the current PowerShell session. When you close the session, the previous configuration will be restored.
+
+Run Your Script
+
+Now you can try running script:
+````
+.\network_monitoring.ps1
+````
+
+Option 2: Permanent Change 
+
+If you need scripts to run permanently, you can change the execution policy globally:
+````
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+````
+
+Note: The RemoteSigned policy allows the execution of all locally created scripts, but only runs downloaded scripts if they are signed by a trusted publisher.
+
+To Revert: To re-restrict script execution, you can run:
+````
+Set-ExecutionPolicy -ExecutionPolicy Restricted -Scope LocalMachine
+````
